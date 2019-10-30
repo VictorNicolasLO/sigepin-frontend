@@ -1,8 +1,11 @@
 * {
   font-family: 'Open Sans', sans-serif;
 }
-
+body {
+  background: gray;
+}
 .App {
+  padding: 30px;
 }
 
 .App-logo {

@@ -1,35 +1,58 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
-import ProjectSlider from './components/project-slider';
-import BioImg from './resources/demo-images/adn.jpg';
-import DataCenterImg from './resources/demo-images/data-center.jpg';
-import useProjectSlider from './components/project-slider/hooks/useProjectSlider';
+import '@material/react-material-icon/dist/material-icon.css';
+import DropDownMenu from './components/drop-down-menu';
+import MaterialIcon from '@material/react-material-icon';
 
 const items = [
   {
-    img: BioImg,
-    area: 'Bioquimica',
-    title: 'Reacción en el ADN',
-    description: 'Descripción sobre los efectos de los alimentos en el ADN',
-    actions: [{ name: 'Ver mas' }],
+    name: 'Ver perfil',
+    icon: <MaterialIcon icon="person" />,
+    color: 'dimgrey',
+    meta: {},
   },
   {
-    img: DataCenterImg,
-    area: 'Sistemas',
-    title: 'Estudio sobre bases de datos distribuidas',
-    description:
-      'Las bases de datos distribuidas son una tecnologia muy eficiente el dia de hoy ',
-    actions: [{ name: 'Ver mas' }],
+    name: 'Notificaciones',
+    icon: <MaterialIcon icon="notifications" />,
+    color: '#9338ac',
+    meta: {},
+  },
+  {
+    name: 'Cerrar sesion',
+    icon: <MaterialIcon icon="exit_to_app" />,
+    color: '#e85f5e',
+    meta: {},
   },
 ];
 function App() {
-  const projectSliderProps = useProjectSlider(items, goToArticle, 5000);
-  function goToArticle(article) {
-    console.log(article);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const anchor = useRef();
+  function switchMenu() {
+    setIsMenuOpen(!isMenuOpen);
   }
+
+  function closeMenu() {
+    setIsMenuOpen(false);
+  }
+
+  function handleSelect() {
+    console.log('Do something');
+    // Do something
+  }
+
   return (
-    <div className="App">
-      <ProjectSlider {...projectSliderProps} />
+    <div class="App">
+      <div ref={anchor} onClick={switchMenu}>
+        Click here
+      </div>
+      <DropDownMenu
+        style={{ marginTop: '25px', marginLeft: '-5px' }}
+        items={items}
+        open={isMenuOpen}
+        onSelect={handleSelect}
+        onClose={closeMenu}
+        anchor={anchor}
+      />
     </div>
   );
 }
