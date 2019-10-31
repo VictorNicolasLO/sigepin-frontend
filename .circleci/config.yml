@@ -17,11 +17,16 @@ jobs:
       - run:
           name: build
           command: "npm run build"
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
   deploy_development:
     docker:
       - image: circleci/node
     steps:
-      - checkout
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: deploy
           command: "firebase deploy --only hosting:development --token --non-interactive --token $FIREBASE_DEPLOY_KEY"
