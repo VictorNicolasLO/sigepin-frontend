@@ -43,7 +43,7 @@ function App() {
   return (
     <div class="App">
       <div ref={anchor} onClick={switchMenu}>
-        Click here
+        Deployed
       </div>
       <DropDownMenu
         style={{ marginTop: '25px', marginLeft: '-5px' }}
