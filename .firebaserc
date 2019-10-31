@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "sigepin-2d624"
+  },
+  "targets": {
+    "sigepin-2d624": {
+      "hosting": {
+        "development": [
+          "sigepin-development"
+        ],
+        "production": [
+          "sigepin-2d624"
+        ]
+      }
+    }
+  }
+}
