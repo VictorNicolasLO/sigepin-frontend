@@ -12,9 +12,6 @@ jobs:
           name: install packages
           command: "npm install"
       - run:
-          name: install firebase tools
-          command: "sudo npm install -g firebase-tools"
-      - run:
           name: build
           command: "npm run build"
       - save_cache:
@@ -27,6 +24,9 @@ jobs:
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: install firebase tools
+          command: "sudo npm install -g firebase-tools"
       - run:
           name: deploy
           command: "firebase deploy --only hosting:development --token --non-interactive --token $FIREBASE_DEPLOY_KEY"
