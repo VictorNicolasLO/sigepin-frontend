@@ -56,6 +56,7 @@ export const Buttons = styled.div`
   text-align: right;
   width: 100%;
   margin-top: 20px;
+  
 `;
 
 export const Button = styled.div`
