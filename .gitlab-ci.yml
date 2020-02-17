@@ -1,0 +1,31 @@
+image: docker:19.03.1
+stages:
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+services:
+  - docker:19.03.0-dind
+
+before_script:
+  - docker info
+
+deploy-prod:
+  stage: deploy
+  only:
+    - master
+  script:
+    - docker login registry.gitlab.com -p $CI_REGISTRY_PASSWORD -u $CI_REGISTRY_USER
+    - docker build -t $CI_REGISTRY_IMAGE:prod .
+    - docker push $CI_REGISTRY_IMAGE:prod
+
+deploy-dev:
+  stage: deploy
+  only:
+    - development
+  script:
+    - docker login registry.gitlab.com -p $CI_REGISTRY_PASSWORD -u $CI_REGISTRY_USER
+    - docker build -t $CI_REGISTRY_IMAGE:dev .
+    - docker push $CI_REGISTRY_IMAGE:dev
