@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Container, Item, IconContainer } from './styled';
-import { AnimationTopToDown } from '../animations';
-import { useClickOutside } from '../../lib/useClickOutside';
+import { AnimationTopToDown } from '../../animations';
+import { useClickOutside } from '../../../hooks/useClickOutside';
 
 function DropDownMenu({ items, open, onClose, anchor, onSelect, style }) {
   const containerRef = useRef();
